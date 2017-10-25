@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>调查问卷</title>
+<style>
+	.dis{
+		display:block;
+	}
+	.non{
+		display:none;
+	}
+	#nolul{
+		list-style:none;
+		margin:0;
+	}
+</style>
+</head>
+<body>
+<!--
+	单选按钮演示。
+	1.是否参与调查问卷？
+	2.性格测试。
+-->
+<!--调查问卷-->
+您要参与问卷调查吗：
+<input type="radio" name="wenjuan" value="yes"/>是
+<input type="radio" name="wenjuan" value="no" checked="checked"/>否<br>
+<div id="one" class="non">
+问卷调查内容：<br>
+您的姓名：<input type="text"/><br>
+你的邮箱：<input type="text">
+</div>
+<hr/>
+<!--性格测试-->
+<h2>欢迎您参与性格测试：</h2>
+<div>
+	<h3>第一题：</h3>
+	<span>您喜欢的水果是什么？</span>
+	<ul id="nolul">
+	<li><input type="radio" name="nol" value="1">葡萄</li>
+	<li><input type="radio" name="nol" value="2">西瓜</li>
+	<li><input type="radio" name="nol" value="3">苹果</li>
+	<li><input type="radio" name="nol" value="4">芒果</li>
+	<li><input type="radio" name="nol" value="5">樱桃</li>
+	</ul>
+</div>
+<div>
+<input type="button" name="but" value="查看测试结果"/>
+<span id="errinfo"></span>
+<p id="res_1" class="non">1-3分：你的性格内向并扭曲，建议······</p>
+<p id="res_2" class="non">4分以上：你的性格外向并分裂，建议·····</p>
+</div>
+<script>
+	function addLoad(fuc)
+	{
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=fuc;
+		}else{
+			window.onload=function(){
+				old();
+				fuc();
+			}
+		}
+	}
+	function disp(){
+		var div=document.getElementById("one");
+		var radio=document.getElementsByName("wenjuan");
+		for(var i=0;i<radio.length;i++){
+			radio[i].onclick=function(){
+				if(this.value=="yes"){
+					div.className="dis";
+				}
+				else{
+					div.className="non";
+				}
+			}
+		}
+	}
+	function ShowResult(){
+		//1.判断答案是否有被选中
+		//获取所有的nol的radio。来遍历判断checked状体
+		var oNol=document.getElementsByName("nol");
+		var but=document.getElementsByName("but")[0];
+		var flag=0;
+		var val;
+		but.onclick=function(){
+			for(var x=0;x<oNol.length;x++){
+			if(oNol[x].checked){
+				flag=1;
+				val=oNol[x].value;
+				}
+			}
+			if(!flag){
+				document.getElementById("errinfo").innerHTML="没有选中任何选项".fontcolor("red");
+				return;
+			}
+			if(val>=1&&val<=3){
+				document.getElementById("res_1").className="dis";
+				document.getElementById("res_2").className="non";
+			}
+			else{
+				document.getElementById("res_1").className="non";
+				document.getElementById("res_2").className="dis";
+			}
+		}
+	}
+	addLoad(disp);
+	addLoad(ShowResult)
+</script>
+</body>
+</html>

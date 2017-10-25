@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>锋利···Ajax之js原生</title>
+	</head>
+	<body>
+		<input id="pe" type="button" value="提交" />
+		<div id="resText"></div>
+		
+		<script>
+			var pe=document.getElementById('pe');
+			pe.onclick=Ajax;
+			function Ajax(){
+				var xmlHttpReq=null;
+				if(window.ActiveXObject){	
+					xmlHttpReq=new ActiveXObject("Microsoft.XMLHTTP");
+				}else if(window.XMLHttpRequest){
+					xmlHttpReq=new XMLHttpRequest();
+				}
+				xmlHttpReq.open('GET',"text.php",true);			//true 是显式异步async参数
+				
+				
+				xmlHttpReq.onreadystatechange=function(){
+					if(xmlHttpReq.readyState==4){
+						if(xmlHttpReq.status==200){
+							document.getElementById('resText').innerHTML=xmlHttpReq.responseText;
+						}
+					}
+				}
+				
+				xmlHttpReq.send(null);					//必须的
+			}
+		</script>
+	</body>
+</html>

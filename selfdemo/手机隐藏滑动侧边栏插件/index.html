@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>适合移动手机使用的隐藏滑动侧边栏插件</title>
+	<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+	<link rel="stylesheet" type="text/css" href="css/default.css">
+	<link rel="stylesheet" href="css/styles.css">
+	<style type="text/css">
+		.section{
+			display:none;
+		}
+	</style>
+</head>
+<body>
+	<nav id="menu" class="menu">
+	  <header class="menu-header">
+		<h2>Menu</h2>
+	  </header>
+	   <section class="menu-section">
+        <h3 class="menu-section-title">Docs</h3>
+        <ul class="menu-section-list">
+          <li><a href="#section1">Installation</a></li>
+          <li><a href="#section2">Usage</a></li>
+          <li><a href="#section3">API</a></li>
+          <li><a href="#" target="_blank">npm-scripts</a></li>
+        </ul>
+      </section>
+	  <section class="menu-section">
+        <h3 class="menu-section-title">Slideout</h3>
+        <ul class="menu-section-list">
+          <li><a href="#" target="_blank">Fork it</a></li>
+          <li><a href="#" target="_blank">Create an issue</a></li>
+          <li><a href="#">Download</a></li>
+        </ul>
+      </section>
+	</nav>
+	 
+	<main id="main" class="panel">
+		<button class="btn-hamburger js-slideout-toggle">
+          <span class="tooltip">Open slideout</span>
+		</button>
+		<section class='active' id='section1'>
+			<header>
+				<h1>啊实打实大苏打</h1>
+			</header>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			
+		</section>
+		<section class='section' id='section2'>
+			<header>
+				<h1>啊实打实大苏打asdasd</h1>
+			</header>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			
+		</section>
+		<section class='section' id='section3'>
+			<header>
+				<h1>asdasdazxc</h1>
+			</header>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p><p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			<p>465as4dasdasd46as4d5as</p>
+			
+		</section>
+	</main>
+	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="js/slideout.min.js"></script>
+	<script type="text/javascript">
+	/*
+		可以使用一个带#menu的<nav>来作为侧边栏菜单。使用<main>元素来作为内容容器。
+	*/
+	/*
+		配置参数
+		Slideout(options)
+
+		创建一个新的Slideout对象实例。
+		options：(Object)在新对象实例中的参数对象。
+		options.panel：(HTMLElement)包含页面内容的DOM元素，默认为.slideout-panel。
+		options.menu：(HTMLElement)侧边栏DOM元素，默认值为.slideout-menu。
+		[options.duration]：(Number)打开/关闭侧边栏的时间，单位毫秒，默认值为300。
+		[options.fx]：(String)打开和关闭侧边栏时的CSS动画的easing效果，默认值为ease。
+		[options.padding]：(Number)默认值为256。
+		[options.tolerance]：(Number)默认值为70。
+		[options.touch]：(Boolean)设置为false时禁用移动触摸事件，默认值为true。
+		[options.side]：(String)在那一边打开侧边栏，可选值为left或right，默认值为left。
+	*/
+	/*
+		方法
+		Slideout.open();：打开侧边栏菜单，它发出beforeopen和open事件。
+		Slideout.close();：关闭侧边栏菜单，它发出beforeclose和close事件。
+		Slideout.toggle();：切换侧边栏菜单。
+		Slideout.isOpen();：如果侧边栏菜单打开返回true，否则返回false。
+		Slideout.enableTouch();：允许通过touch事件来打开侧边栏菜单。
+		Slideout.disableTouch();：禁止通过touch事件来打开侧边栏菜单。
+		Slideout.on(event, listener);
+			slideout.on('open', function() { ... });
+		Slideout.once(event, listener);
+			slideout.once('open', function() { ... });
+		Slideout.off(event, listener);
+			slideout.off('open', listener);
+		Slideout.emit(event, ...data); slideout.emit('open');
+		 事件
+		一个Slideout对象实例会发出下面的一些事件：
+		beforeclose
+		close
+		beforeopen
+		open
+		translate
+		Slideout对象实例只有在通过touch事件打开和关闭菜单时才发出translate事件。
+		slideout.on('translate', function(translated) {
+		  console.log(translated); // 120 in px
+		});
+	*/
+		var slideout = new Slideout({
+	        'panel': document.getElementById('main'),
+	        'menu': document.getElementById('menu'),
+	        'padding': 256,
+	        'tolerance': 70,
+	      });
+		  //和内容结合
+		$('li a').on('click',function(){
+			var a=$(this).attr('href').substring(1);
+			for(var i=0;i<$('.panel section').length;i++){
+				if(a==$('.panel section').eq(i).attr('id')){
+					$('.panel section').eq(i).removeClass().addClass('active').siblings('section').removeClass().addClass('section');
+				}
+			}
+			
+		});
+		//控制侧栏
+		  document.querySelector('.js-slideout-toggle').addEventListener('click', function() {
+			slideout.toggle();
+		  });
+
+		  document.querySelector('.menu').addEventListener('click', function(eve) {
+			if (eve.target.nodeName === 'A') { slideout.close(); }
+		  });
+	</script>
+</body>
+</html>

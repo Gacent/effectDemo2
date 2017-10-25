@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>支持移动端的响应式jQuery焦点图插件</title>
+	<link rel="stylesheet" href="css/jquery.hiSlider.min.css">
+	<style>
+		*{
+		    margin: 0;
+		    padding: 0;
+		}
+		li{
+		    list-style: none;
+		}
+		li img{
+		    display: block;
+		    margin: 0 auto;
+			width:100%;
+			height:100%;
+		}
+		.hiSlider{
+		    overflow: hidden;
+		    height: 280px;
+		    width: 500px;
+		    background: #eee;
+		}
+		.hiSlider-item{
+		    float: left;
+		}
+	</style>
+</head>
+<body>
+	<ul class="hiSlider demo">
+	  <li data-title="1" class="hiSlider-item">
+		<img src="images/1.jpg" alt="1">
+	  </li>
+	  <li data-title="2" class="hiSlider-item">
+		<img src="images/2.jpg" alt="2">
+	  </li>
+	  <li data-title="3" class="hiSlider-item">
+		<img src="images/3.jpg" alt="3">
+	  </li>
+	  <li data-title="4" class="hiSlider-item">
+		<img src="images/4.jpg" alt="4">
+	  </li>
+	  <li data-title="5" class="hiSlider-item">
+		<img src="images/5.jpg" alt="5">
+	  </li>
+	</ul>
+	<script src="js/jquery.1.9.1.js"></script>
+	<script src="js/jquery.hiSlider.min.js"></script>
+	<script>
+	/*
+		startSlide：开始索引，从0开始。默认值：0。
+		item：子元素选择器。默认值：'.hiSlider-item'。
+		isFullScreen：是否全屏，默认值：false。
+		isFlexible：是否自适应，默认值：false。
+		isSupportTouch：是否支持触摸、html5和css3transform。默认值：'__proto__' in {}。
+		isShowPage：是否显示分页按钮。默认值：true。
+		isShowTitle：是否显示标题栏。默认值：true。
+		titleAttr：标题文本存放的属性 或者回调函数(需要返回值)，默认值：'data-title'。
+		isShowControls：是否显示左右控制按钮，默认值：true。
+		isAuto：是否自动播放，默认值：true。
+		intervalTime：自动播放间隔时间，默认值：5000。
+		affectTime：特效时间，默认值：500。
+		mode：特效类型，可选值有：fade || move，默认值为："move"。
+		direction：方向，可选值有：left || top，默认值为："left"。
+		onSwipeStart：开始滑动时的回调函数。默认值：$.noop。
+		onSwipeMove：滑动中的回调函数。默认值：$.noop。
+		minSwipeLength：正常滑动的最小值。默认值：30。
+		onSwipeCancel：滑动取消回调 和 minSwipeLength值有关，默认值：$.noop。
+		onSwipeEnd：触摸结束回调 (正常触摸)，默认值：$.noop。
+		onSwipeLeft：向左滑动时的回调函数。默认值：$.noop。
+		onSwipeRight：向右滑动时的回调函数。默认值：$.noop。
+		onSwipeTop：向上滑动时的回调函数。默认值：$.noop。
+		onSwipeBottom：向下滑动时的回调函数。默认值：$.noop。
+		onInited：初始化后的回调函数，默认值：$.noop。
+		onMoveBefore：幻灯片运动前的回调函数，默认值：$.noop。
+		onMoveAfter：幻灯片运动后的回调函数，默认值：$.noop。
+		onSelected：分页被选中时的回调函数，默认值：$.noop。
+	*/
+	    $('.demo').hiSlider({
+			mode:'move',
+			direction:'top',
+			isFlexible:true,
+			isFullScreen:true
+		});
+	</script>
+</body>
+</html>

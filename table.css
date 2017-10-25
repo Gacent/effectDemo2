@@ -1,0 +1,14 @@
+table{
+	border:#249bdb 1px solid;
+	width:500px;
+	border-collapse:collapse;//合并单元格,之间没间距
+}
+table td{
+	border:#249bdb 1px solid;
+	padding:10px;
+}
+table th{
+	border:#249bdb 1px solid;
+	padding:10px;
+	background-color:rgb(200,200,200);
+}

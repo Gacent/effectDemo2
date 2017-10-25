@@ -1,0 +1,51 @@
+*{
+	padding:0;
+	margin:0;
+	list-style:none;
+}
+.tabs{
+	margin:50px;
+}
+.tabs .header{
+	width:300px;
+	background:#e7393c;
+	height:50px;
+	font-size:18px;
+	font-family:Î¢ÈíÑÅºÚ;
+	font-weight:bold;
+	border-radius:10px 10px 0 0;
+	cursor:pointer;
+}
+.tabs .header li{
+	float:left;
+	width:75px;
+	text-align:center;
+	height:50px;
+	line-height:50px;
+}
+.tabs .content{
+	width:300px;
+	background:#ccc;
+	height:300px;
+	overflow:hidden;
+	border-radius:0 0 10px 10px;
+	color:#333;
+}
+.tabs .content li ul{
+	float:left;
+	width:280px;
+	height:200px;
+	padding:50px 10px;
+}
+.tabs .content li ul li{
+	width:250px;
+	height:60px;
+	font-size:15px;
+	margin:0 auto;
+	letter-spacing:2px;
+}
+.active{
+	background:#ccc;
+	color:#e7393c;
+	border-radius:10px 10px 0 0;
+}

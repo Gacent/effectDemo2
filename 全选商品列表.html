@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>全部商品列表</title>
+</head>
+<body>
+	<input type="checkbox" name="All" onclick="checkAll(this)"/>全选<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="item" value="4000"/>笔记本电脑：4000元<br/>
+	<input type="checkbox" name="All" onclick="checkAll(this)"/>全选<br/>
+	<input type="button" name="button" value="总金额"/><p></p>
+<script>
+	function addLoad(func){
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=func;
+		}else{
+			window.onload=function(){
+				old();
+				func();
+			}
+		}
+	}
+	function Plus(){
+		/*
+		 *获取所有的item复选框
+		 *判断checked状态，为true表示选中，获取该节点的value进行累加
+		*/
+		var sum=0;
+		var button=document.getElementsByName("button")[0];
+		var item=document.getElementsByName("item");
+		button.onclick=function(){
+			for(var i=0;i<item.length;i++){
+				if(item[i].checked){
+					sum+=parseInt(item[i].value);
+				}
+			}
+			var p=document.getElementsByTagName("p")[0];
+			p.innerHTML=sum+"元";
+			sum=0;
+		}
+	}
+	function checkAll(node){
+		/*
+			将全选的box的checked状态赋值给所有的itembox的checked
+		*/
+		var item=document.getElementsByName("item");
+		for(var i=0;i<item.length;i++){
+			item[i].checked=node.checked;
+		}
+	}
+	addLoad(Plus);
+</script>
+</body>
+</html>

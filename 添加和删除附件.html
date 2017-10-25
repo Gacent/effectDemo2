@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>添加和删除附件</title>
+</head>
+<style>
+	td a:link,td:visited{
+		color:#888;
+		text-decoration:none;
+	}
+	td a:hover{
+		color:#e7393c;
+	}
+</style>
+<body>
+	<table id="Table">
+		<tr>
+			<td><a href="javascript:void(0)">添加附件</a></td>
+		</tr>
+	</table>
+<script>
+	function addLoad(elem)
+	{
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=elem;
+		}
+		else{
+			window.onload=function(){
+				old();
+				elem();
+			}
+		}
+	}
+	function AddFile(){
+		var Table=document.getElementById("Table");
+		var AddA=Table.getElementsByTagName("a")[0];
+		AddA.onclick=function(){
+			var oRow=Table.insertRow();//添加行
+			var oCellInput=oRow.insertCell();//添加行的单元格
+			var oCellA=oRow.insertCell();//添加行的单元格
+			oCellInput.innerHTML="<input type='file'/>";
+			oCellA.innerHTML="<a href='javascript:void(0)' onclick='delFile(this)'>删除附件</a>"
+		}
+	}
+	function delFile(node){
+		var oTr=node.parentNode.parentNode;
+		oTr.parentNode.removeChild(oTr);
+	}
+	addLoad(AddFile);
+</script>
+</body>
+</html>

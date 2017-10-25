@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>表单验证</title>
+</head>
+<style>
+	label{
+		display:block;
+	}
+</style>
+<body>
+	<form id="Forms" onsubmit="return checkForm()">
+		<label for="text">用户名称：</label>
+			<input type="text" name="texts" id="text"><span id="userSpan"></span>
+		<label for="password">用户密码：</label>
+			<input type="password" name="passwords" id="password"><span id="passwordSpan"></span>
+		<label for="repassword">确认密码：</label>
+			<input type="password" name="repasswords" id="repassword"><span id="repasswordSpan"></span>
+		<label for="Mail">邮箱地址：</label>
+			<input type="text" name="Mails" id="Mail"><span id="mailspan"></span><br>
+		<input type="submit" value="提交数据"/>
+	</form>
+	<!--自定义提交按钮,form有submit方法可以提交
+	<input type="button" value="我的提交" id="button" onclick="checkForm()">-->
+	<script>
+		/*校验用户名
+		var flag;
+		function Check(){
+			var Inp=document.getElementsByTagName("input");
+			var userSpan=document.getElementById("userSpan");
+			var passwordSpan=document.getElementById("passwordSpan");
+			//正则表达式
+			//var reg=new RegExp("[a-z]{4}","i");//[a-z]连续四个字母,i:忽略大小写,g:全文查找出现所有的pattern,n:多行查找
+			//var reg=new RegExp("^[a-z]{4}$","i");//[a-z]连续四个字母,^:头，$:尾（头到尾只能有四个字母）
+			var reg=/\d{4}/i;//适合用正则符号，\\d（数字）
+			Inp[0].onblur=function(){
+				if(reg.test(Inp[0].value)){
+					userSpan.innerHTML='用户名正确'.fontcolor('green');
+					flag=true;
+				}else{
+					userSpan.innerHTML='用户名错误'.fontcolor('red');
+					flag=false;
+				}
+			}
+			return flag;
+		}*/
+		//校验模版
+		var flag,flags;
+		function Check(name,reg,spanid,OK,ERROR){
+			var Inp=document.getElementById(name);
+			var userSpan=document.getElementById(spanid);
+			Inp.onblur=function(){
+				if(reg.test(Inp.value)){
+					userSpan.innerHTML=OK.fontcolor('green');
+					flag=true;
+				}else{
+					userSpan.innerHTML=ERROR.fontcolor('red');
+					flag=false;
+				}
+			}
+			return flag;
+		}
+		function checkForm(){
+			//alert(CheckUser()+'--'+CheckPassword()+'--'+CheckMail()+'--'+CheckRepassword())
+			if(CheckUser()&&CheckPassword()&&CheckMail()&&CheckRepassword()){
+				return true;
+			}
+			return false;
+		}
+		//校验用户名
+		function CheckUser(){
+			var reg=/[a-z]{4}/i;
+			return Check('text',reg,'userSpan','用户名正确','用户名错误');
+		}
+		//校验密码
+		function CheckPassword(){
+			var reg=/^\d{4}$/;
+			return Check('password',reg,'passwordSpan','密码正确','密码错误');
+		}
+		//校验确认密码,只要和密码一致就行
+		function CheckRepassword(){
+			var repass=document.getElementsByName("repasswords")[0];
+			repass.onblur=function(){
+				//获取密码框内容
+				var pass=document.getElementsByName("passwords")[0].value;
+				//确认密码框内容
+				var repass_val=repass.value;
+				//获取确认密码的span区域
+				var oSpanNode=document.getElementById("repasswordSpan");
+				if(pass==repass_val&&pass!=""){
+					oSpanNode.innerHTML='两次密码一致'.fontcolor('green');
+					flags=true;
+				}else{
+					oSpanNode.innerHTML='两次密码不一致或不能为空'.fontcolor('red');
+					flags=false;
+				}
+			}
+			return flags;
+		}
+		//校验邮件
+		function CheckMail(){
+			var reg=/^\w+@\w+(\.\w+)+$/i;
+			return Check('Mail',reg,'mailspan','邮件地址正确','邮件地址错误');
+		}
+		//我的提交
+		function SelfCheck(){
+			var Form=document.getElementById("Forms");
+			var Button=document.getElementById("button");
+			Button.onclick=function(){
+				if(Check()){
+					Forms.submit();
+				}
+			}
+		}
+		function addLoad(func)
+		{
+			var old=window.onload;
+			if(typeof window.onload!='function'){
+				window.onload=func;
+			}
+			else{
+				window.onload=function(){
+					old();
+					func();
+				}
+			}
+		}
+		//addLoad(checkForm);
+		//addLoad(CheckUser);
+		//addLoad(SelfCheck);
+		addLoad(CheckUser);
+		addLoad(CheckPassword);
+		addLoad(CheckMail);
+		addLoad(CheckRepassword);
+	</script>
+</body>
+</html>

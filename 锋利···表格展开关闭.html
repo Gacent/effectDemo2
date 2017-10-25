@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表格展开关闭</title>
+		<style>
+			.parent{
+				background: #CCCCCC;
+			}
+			table{
+				border: 1px solid #ccc;
+				width:400px;
+				text-align: center;
+			}
+			.child td{
+				width: 50px;
+			}
+			th{
+				width: 50px;
+			}
+			.selected{
+				background: #000000;
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<span class="search">筛选:</span><input type="search" id="searchName" />
+		<table>
+			<thead>
+				<tr>
+					<th>姓名</th>
+					<th>性别</th>
+					<th>暂住地</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="parent" id="row_01"><td colspan="3">前台设计组</td></tr>
+				<tr class="child_row_01 child"><td>张山</td><td>男</td><td>母鸡</td></tr>
+				<tr class="child_row_01 child"><td>李四</td><td>女</td><td>母鸡</td></tr>
+				
+				<tr class="parent" id="row_02"><td colspan="3">前台开发组</td></tr>
+				<tr class="child_row_02 child"><td>王五</td><td>男</td><td>母鸡</td></tr>
+				<tr class="child_row_02 child"><td>赵六</td><td>女</td><td>母鸡</td></tr>
+				
+				<tr class="parent" id="row_03"><td colspan="3">前台设计组</td></tr>
+				<tr class="child_row_03 child"><td>Rain</td><td>男</td><td>母鸡</td></tr>
+				<tr class="child_row_03 child"><td>MAXMAN</td><td>女</td><td>母鸡</td></tr>
+			</tbody>
+		</table>
+		
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script>
+			$(function(){
+				//展开关闭
+				$('tr.parent').click(function(){
+					$(this).toggleClass('selected').siblings('.child_'+this.id).toggle();
+				}).click();             //默认关闭
+				
+				
+				//搜索
+				$('#searchName').keyup(function(){
+					if($(this).val()==''){
+						$('table tbody tr').show();
+					}else{
+						$('table tbody tr').hide().filter(':contains("'+$(this).val()+'")').show();
+					}
+				}).keyup()
+			})
+		</script>
+	</body>
+</html>

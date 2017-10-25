@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>带视觉差和子幻灯片特效的jQuery幻灯片插件</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" href="css/pignose.parallaxslider.min.css" />
+</head>
+<body>
+	<div id="visual">
+		<div class="slide-visual">
+			<!-- 幻灯片区域 (1000 x 424) -->
+			<ul class="slide-group">
+				<li><img src="img/visual_slide01.jpg" alt="slider image" /></li>
+				<li><img src="img/visual_slide02.jpg" alt="slider image" /></li>
+				<li><img src="img/visual_slide03.jpg" alt="slider image" /></li>
+				<li><img src="img/visual_slide04.jpg" alt="slider image" /></li>
+				<li><img src="img/visual_slide05.jpg" alt="slider image" /></li>
+				<li><img src="img/visual_slide06.jpg" alt="slider image" /></li>
+			</ul>
+	 
+			<!-- 子幻灯片区域 (316 x 328) -->
+			<div class="script-wrap">
+				<ul class="script-group">
+					<li><div class="inner-script"><img src="img/visual_slide_script01.jpg" alt="thumbnail slider image" /></div></li>
+					<li><div class="inner-script"><img src="img/visual_slide_script02.jpg" alt="thumbnail slider image" /></div></li>
+					<li><div class="inner-script"><img src="img/visual_slide_script03.jpg" alt="thumbnail slider image" /></div></li>
+					<li><div class="inner-script"><img src="img/visual_slide_script04.jpg" alt="thumbnail slider image" /></div></li>
+					<li><div class="inner-script"><img src="img/visual_slide_script05.jpg" alt="thumbnail slider image" /></div></li>
+					<li><div class="inner-script"><img src="img/visual_slide_script06.jpg" alt="thumbnail slider image" /></div></li>
+				</ul>
+				<div class="slide-controller">
+					<a href="#" class="btn-prev"><img src="img/btn_prev.png" alt="prev slide" /></a>
+					<a href="#" class="btn-play"><img src="img/btn_play.png" alt="start slide" /></a>
+					<a href="#" class="btn-pause"><img src="img/btn_pause.png" alt="pause slide" /></a>
+					<a href="#" class="btn-next"><img src="img/btn_next.png" alt="next slide" /></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+	<script type="text/javascript" src="js/jquery.easing.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/pignose.parallaxslider.min.js"></script>
+	<script type="text/javascript">
+	/*
+	参数	名称	默认值	描述
+	speed	number	1200	幻灯片的动画速度，单位毫秒
+	interval	number	3000	幻灯片播放的间隔时间，单位毫秒
+	direction	string	right	幻灯片动画的方向
+	diffTime	number	300	主幻灯片和子幻灯片的视觉差时间，单位毫秒
+	controlAnim	boolean	true	如果该参数设置为false，插件会忽略动画队列的状态
+	pagination	boolean	true	是否显示分页圆点按钮
+	auto	boolean	true	是否自动开始播放幻灯片
+	isLocal	boolean	true	该属性设置控制按钮（播放、暂停、next、prev）是否属于当前的容器
+	play	jQuery object	null	播放按钮
+	pause	jQuery object	null	暂停按钮
+	next	jQuery object	null	next按钮
+	prev	jQuery object	null	prev按钮
+	afterMove	callback	null	幻灯片移动之后的回调函数
+	*/
+		$(window).load(function() {
+			$('#visual').pignoseParallaxSlider({
+				play    : '.btn-play',
+				pause   : '.btn-pause',
+				next    : '.btn-next',
+				prev    : '.btn-prev'
+			});
+		});
+	</script>
+</body>
+</html>

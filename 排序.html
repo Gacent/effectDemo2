@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<link rel="stylesheet" type="text/css" href="table.css"/>
+<title>排序</title>
+<style>
+	a{
+		text-decoration:none;
+	}
+	a:link,a:visited{
+		color:#e7393c;
+	}
+</style>
+</head>
+<body>
+<table id="table">
+	<tr>
+		<th>姓名</th>
+		<th><a href="javascript:void(0)" onclick="PrepareSort()">年龄</a></th>
+		<th>性别</th>
+	</tr>
+	<tr>
+		<td>小米</td>
+		<td>18</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>大波</td>
+		<td>23</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>小敏</td>
+		<td>8</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>犀利哥</td>
+		<td>90</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>无厘头</td>
+		<td>56</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>剌吟</td>
+		<td>44</td>
+		<td>谜</td>
+	</tr>
+	<tr>
+		<td>小荣</td>
+		<td>78</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>大米</td>
+		<td>11</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>大傻</td>
+		<td>5</td>
+		<td>女</td>
+	</tr>
+</table>
+<script>
+				/*
+				 * 思路：
+				 * 1，排序就需要数组。获取需要参与排序的行对象数组。
+				 * 2，对行数组中的每一个行的年龄单元格的数据进行比较，并完成行对象在数组中的位置置换。
+				 * 3，将排好序的数组重新添加回表格。
+				 */
+	var flag=1;
+	function addLoad(fuc)
+	{
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=fuc;
+		}else{
+			window.onload=function(){
+				old();
+				fuc();
+			}
+		}
+	}
+	function PrepareSort(){
+		var oTable=document.getElementById("table");
+		var Row=oTable.rows;
+		var trArr=[];
+		for(var i=1;i<Row.length;i++){
+			trArr[i-1]=Row[i];
+		}
+		mySort(trArr);
+		if(flag){
+			for(var j=0;j<trArr.length;j++){
+				trArr[j].parentNode.appendChild(trArr[j]);//由于trArr对象还是属于table的，所以追加的时候是已有的元素追加。
+			}
+			flag=0;
+		}else{
+			for(var j=trArr.length-1;j>=0;j--){
+				trArr[j].parentNode.appendChild(trArr[j]);
+			}
+			flag=0;
+		}
+	}
+	function mySort(arr){
+		for(var i=0;i<arr.length;i++){
+			for(var j=i+1;j<arr.length;j++){
+				if(parseInt(arr[i].cells[1].innerHTML)>parseInt(arr[j].cells[1].innerHTML)){
+					var temp=arr[i];
+					arr[i]=arr[j];
+					arr[j]=temp;
+				}
+			}
+		}
+	}	
+</script>
+</body>
+</html>

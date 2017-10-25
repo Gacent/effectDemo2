@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>视频展示效果实例</title>
+</head>
+<style>
+	*{
+		padding: 0;
+		margin: 0;
+	}
+	.show{
+		width: 1000px;
+		margin: 100px auto;
+	}
+	.show_top{
+		width: 1000px;
+		height: 50px;
+		background: #CCCCCC;
+	}
+	.show_top h2,.curr,.arrow{
+		float: left;
+		height: 100%;
+		line-height: 50px;
+	}
+	.curr,.arrow{
+		margin-left: 50px;
+		cursor: pointer;
+	}
+	.show_top ul,.show_content ul{
+		list-style: none;
+	}
+	.show_content ul{
+		position: absolute;
+		left: 0;
+	}
+	.show_top ul li{
+		float: left;
+		margin-left: 10px;
+		font-size: 20px;
+	}
+	.cu{
+		color: #fff;
+	}
+	.more{
+		float: right;
+		line-height: 50px;
+	}
+	.show_content{
+		width: 1000px;
+		overflow: hidden;
+		position: relative;
+		height: auto;
+		height: 200px;
+	}
+	.show_content ul li{
+		float: left;
+		margin: 0 5px;
+	}
+	.show_content ul li img{
+		width: 240px;
+		height: 200px;
+	}
+</style>
+<body>
+	
+	<div class="show">
+		<div class="show_top">
+			<h2>卡通漫画</h2>
+			<div class="curr">
+				<ul>
+					<li class="cu">o</li>
+					<li>o</li>
+					<li>o</li>
+				</ul>
+			</div>
+			<div class="arrow">
+				<span class="left">L</span>
+				<span class="right">R</span>
+			</div>
+			<div class="more">
+				<p>更多</p>
+			</div>
+			<div style="clear: both;"></div>
+		</div>
+		<div class="show_content">
+			<ul class="ship">
+				<li><img src="images/pic1.jpg"></li>
+				<li><img src="images/pic1.jpg"></li>
+				<li><img src="images/pic1.jpg"></li>
+				<li><img src="images/pic3.jpg"></li>
+				<li><img src="images/pic1.jpg"></li>
+				<li><img src="images/pic2.jpg"></li>
+				<li><img src="images/pic2.jpg"></li>
+				<li><img src="images/pic2.jpg"></li>
+				<li><img src="images/pic2.jpg"></li>
+				<li><img src="images/pic3.jpg"></li>
+				<li><img src="images/pic1.jpg"></li>
+				<li><img src="images/pic1.jpg"></li>
+				<div style="clear: both;"></div>
+			</ul>
+		</div>
+	</div>
+	<script type='text/javascript' src='js/jquery-1.11.3.min.js'></script>
+	<script>
+		
+		$(function(){
+			//动态测量ul的宽度
+			function ulwidth(ul){
+				var $li=ul.find('li');
+				ul.width($li.length*$li.width()+'20');
+			}
+			
+			ulwidth($('.ship'));
+			
+			//动画右
+			$('.arrow .right').bind('click',function(){
+				var $content=$('.show_content').width();
+				
+				if(!$('.show_content ul').is(':animated')){
+					if($('.curr').find('.cu').index()==$('.curr li').length-1){
+						$('.curr li').eq(0).addClass('cu').siblings().removeClass('cu');
+						$('.show_content ul').animate({
+							left:0
+						});
+					}else{
+						$('.curr').find('.cu').removeClass('cu').next().addClass('cu');
+						$('.show_content ul').animate({
+							left:'-='+$content
+						});
+					}
+				}
+			})
+			
+			//动画左
+			$('.arrow .left').bind('click',function(){
+				var $content=$('.show_content').width();
+				
+				if(!$('.show_content ul').is(':animated')){
+					if($('.curr').find('.cu').index()==0){
+						$('.curr li').eq($('.curr li').length-1).addClass('cu').siblings().removeClass('cu');
+						$('.show_content ul').animate({
+								left:-$content*($('.curr li').length-1)
+							});
+					}else{
+						$('.curr').find('.cu').removeClass('cu').prev().addClass('cu');
+						$('.show_content ul').animate({
+							left:'+='+$content
+						});
+					}
+				}
+			})
+			
+
+			
+		})
+	</script>
+</body>
+</html>

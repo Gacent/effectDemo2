@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>新闻字体</title>
+<link rel="stylesheet" type="text/css" href="images/新闻字体_1.css" id="Css"/>
+</head>
+<body>
+		<!--
+		需求：新闻字体的大中小样式改变。
+		
+		思路：
+		1，先有新闻数据，并用标签封装。
+		2，定义一些页面样式。静态的样式和预定义的样式(用于动态效果，方便于事件处理时的样式加载。)
+		3，确定事件源和事件，以及处理方式中被处理的节点。
+			事件源：a标签，事件：onclick。
+			被处理的节点 div-newstext
+			
+			既然要给超链接加入自定义的事件处理，就要先取消超链接的默认点击效果。 
+			可以使用给href设置：javascript:void(0)来完成。 
+		4，用js处理页面的行为。	
+		-->
+<div id="whole">
+<h3>这是新闻标题</h3>
+<hr/>
+<a href="javascript:;">加字体</a>
+<a href="javascript:void(0)">减字体</a>
+<a href="javascript:;">杰伦风</a>
+<a href="javascript:;">简约风</a>
+<div id="news" style="font-size:14px">
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+<p>新闻内容很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长</p>
+</div>
+</div>
+<script>
+
+	function addLoad(fuc)
+	{
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=fuc;
+		}else{
+			window.onload=function(){
+				old();
+				fuc();
+			}
+		}
+	}
+			/*
+			 * 如果根据用户点击所需要的效果不唯一。
+			 * 仅通过传递多个参数虽然可以实现效果，
+			 * 但是
+			 * 1，传参过多，阅读性差，
+			 * 2，js代码和css代码耦合性高。
+			 * 3，不利于扩展。
+			 * 
+			 * 解决：
+			 * 将多个所需的样式进行封装。 
+			 * 封装到选择器中，只要给指定的标签加载不同的而选择器就可以了。
+			 */
+	function changeFont(){
+		var p=document.getElementById("news");
+		var a=document.getElementsByTagName("a");
+		a[0].onclick=function(){
+			var Font=p.style.fontSize;
+			var now=parseInt(Font);
+			if(now==20){
+				return;
+			}	
+			p.style.fontSize=now+2+'px';
+		}
+		a[1].onclick=function(){
+			var Font=p.style.fontSize;
+			var now=parseInt(Font);
+			if(now==12){
+				return;
+			}	
+			p.style.fontSize=now-2+'px';
+		}
+	}
+	function changeCss(){
+		var Css=document.getElementById("Css");
+		var a=document.getElementsByTagName("a");
+		a[2].onclick=function(){
+			Css.setAttribute("href","images/新闻字体_2.css");
+		}
+		a[3].onclick=function(){
+			Css.setAttribute("href","images/新闻字体_1.css");
+		}
+	}
+	addLoad(changeFont);
+	addLoad(changeCss)
+</script>
+</body>
+</html>

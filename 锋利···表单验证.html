@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>表单验证</title>
+	</head>
+	<body>
+		<form action="#" method="get">
+			<div class="int">
+				<label for="username">用户名：</label>
+				<input type="text" id="username" class="required" />
+			</div>
+			<div class="int">
+				<label for="email">邮箱：</label>
+				<input type="text" id="email" class="required" />
+			</div>
+			<div class="int">
+				<label for="personinfo">个人资料：</label>
+				<input type="text" id="personinfo" />
+			</div>
+			<div class="sub">
+				<input type="submit" value="提交" id="send" /><input type="reset" id="res" />
+			</div>
+		</form>
+		
+		<script type="text/javascript" src="js/jquery-1.11.3.min.js" ></script>
+		<script>
+			$(function(){
+				//必填项加*
+				$('form :input.required').each(function(){
+					var $required=$("<strong class='high'>*</strong>");
+					$(this).parent().append($required);
+				});
+				
+				$('form :input').blur(function(){
+					var $parent=$(this).parent();
+					//删除冗余
+					$parent.find('.formtips').remove();
+					//验证用户名
+					if($(this).is('#username')){
+						if(this.value==''||this.value.length<6){
+							var errorMsg='请输入至少6为的用户名';
+							$parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+						}else{
+							var Msg='输入正确';
+							$parent.append('<span class="formtips onSuccess">'+Msg+'</span>');
+						}
+					}
+					//验证邮箱
+					if($(this).is('#email')){
+						if(this.value==''||this.value!=''&&!/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value)){
+							var errorMsg='请输入正确的Email';
+							$parent.append('<span class="formtips onError">'+errorMsg+'</span>');
+						}else{
+							var Msg='输入正确';
+							$parent.append('<span class="formtips onSuccess">'+Msg+'</span>');
+						}
+					}
+				}).keyup(function(){
+					$(this).triggerHandler('blur');
+				}).focus(function(){
+					$(this).triggerHandler('blur');
+				});
+				
+				//send
+				$('#send').click(function(){
+					$('form .required:input').trigger('blur');
+					var numError=$('form .onError').length;
+					if(numError){
+						return false;
+					}
+					alert('注册成功！！');
+				})
+			})
+		</script>
+	</body>
+</html>

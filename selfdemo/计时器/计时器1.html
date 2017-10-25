@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>计时器</title>
+</head>
+<style>
+	#while{
+		width:500px;
+		height:500px;
+		margin:200px auto;
+	}
+	#box{
+		width:200px;
+		margin:30px auto;
+		font-size:50px;
+	}
+	span{
+		display:inline-block;
+		width:50px;
+		height:50px;
+		text-align:center;
+	}
+	#button{
+		width:145px;
+		height:100px;
+		margin:0 auto;
+	}
+</style>
+<body>
+<div id='while'>
+	<div id='box'><span id='hours'>23</span>:<span id='minutes'>59</span>:<span id='seconds'>58</span></div>
+	<div id="button">
+		<input type='button' id='start' value='开始'>
+		<input type='button' id='stop' value='暂停'>
+		<input type='button' id='zero' value='归零'>
+	</div>
+</div>
+
+<script>
+	function addLoadEvent(func){
+		var oldonload=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=func;
+		}
+		else{
+			window.onload=function(){
+				oldonload();
+				func();
+			}
+		}
+	}
+	//开始
+	var hours=document.getElementById('hours');
+	var minutes=document.getElementById('minutes');
+	var seconds=document.getElementById('seconds');
+	var timer=0;
+	var flag=true;
+	function start(){
+			var button=document.getElementById('start');
+			button.onclick=function(){
+				clearInterval(timer);
+				timer=setInterval(function(){
+					seconds.innerText++;
+					if(seconds.innerText>59){
+						minutes.innerText++;
+						seconds.innerText=0;
+						if(minutes.innerText>59){
+							hours.innerText++;
+							minutes.innerText=0;
+							seconds.innerText=0;
+							if(hours.innerText>23){
+								hours.innerText=0;
+								minutes.innerText=0;
+								seconds.innerText=0;
+							}
+						}
+					}
+				},1000);
+			}
+	}
+	function stop(){
+		var button=document.getElementById('stop');
+		button.onclick=function(){
+			clearInterval(timer);
+		}
+	}
+	function zero(){
+		var button=document.getElementById('zero');
+		button.onclick=function(){
+			hours.innerText=0;minutes.innerText=0;seconds.innerText=0;
+			stop();
+		}
+	}
+	addLoadEvent(start);
+	addLoadEvent(stop);
+	addLoadEvent(zero);
+	
+	
+	function Move(){
+		
+	}
+</script>
+</body>
+</html>

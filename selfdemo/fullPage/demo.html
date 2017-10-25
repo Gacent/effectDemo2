@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<link rel='stylesheet' href='css/jquery.fullPage.css'/>
+<title>demo</title>
+<style>
+	body{
+		color:#fff;
+	}
+	.section1{
+		background:red;
+	}
+	.section2{
+		background:green;
+	}
+	.section3{
+		background:blue;
+	}
+	.section4{
+		background:orange;
+	}
+	.slide{
+		text-align:center;
+	}
+	#fullpageMenu{
+		position:fixed;
+		top:0;
+		z-index:999;
+	}
+</style>
+</head>
+<body>
+<ul id='fullpageMenu'>
+	<li data-menuanchor='page1' class='active'><a href='#page1'>1 section</a></li>
+	<li data-menuanchor='page2'><a href='#page2'>2 section</a></li>
+	<li data-menuanchor='page3'><a href='#page3'>3 section</a></li>
+	<li data-menuanchor='page4'><a href='#page4'>4 section</a></li>
+</ul>
+<div id='fullpage'>
+	<div class='section section1'><h1>这是第一屏</h1></div>
+	<div class='section section2'>
+		<div class='slide'>slide1</div>
+		<div class='slide'>slide2</div>
+		<div class='slide'>slide3</div>
+		<div class='slide'>slide4</div>
+	</div>
+	<div class='section section3'><h1>这是第三屏</h1></div>
+	<div class='section section4'><h1>这是第四屏</h1></div>
+</div>
+
+<script src='js/jquery.js'></script>
+<script src='js/jquery.easings.min.js'></script>
+<script src='js/jquery.fullPage.js'></script>
+<script src='js/jquery.slimscroll.min.js'></script>
+<script>
+	$(document).ready(function(){
+		$('#fullpage').fullpage({
+			anchors:['page1','page2','page3','page4'],
+			menu:'#fullpageMenu',
+			scrollOverflow:true,
+		});
+	//	$.fn.fullpage.setAllowScrolling(false,'up')
+	})
+	/*
+		//配置项
+		$(document).ready(function(){
+			$('#fullpage').fullpage({
+				sectionsColor:[''],							//为每个section设置背景颜色
+				controlArrows:true,							//是否通过箭头来控制slide幻灯片,移动设备可以通过滑动切换
+				verticalCentered:true,						//每一页内容是否垂直居中，true为是
+				resize:true,								//字体是否随着窗口的缩放而缩放，默认是false
+				scrollingSpeed:700, 						//滚动速度，默认是700毫秒
+				anchors:['page1','page2','page3','page4'],	//锚链接，注意：不能和页面的id或者name的值相同，而且定义时不加#，
+																和section的顺序一致，每一个页面都会加上这个#page1`````;
+																可以通过class='active'来定义打开网页的初始化的屏
+				lockAnchors:true,							//锁定锚链接，即页面不随切换而更改锚链接
+				easing:easeInOutCubic,						//定义页面section滚动的动画方式，默认为easeInOutCubic,如果修改此项需要引入jq.easings插件,或jq ui
+				css3:true,									//是否使用css3 transforms来实现滚动效果，默认是true
+				loopTop:false,								//滚动到最顶部是否连续滚动到底部，默认false
+				loopBottom:false,							
+				loopHorizontal:true,						//横向slide幻灯片是否循环播放，默认true
+				autoScrolling:true,							//是否按插件的方式滚动，默认true，如是是false则有滚动条，按滚动条滚动
+				scrollBar:false,							//是否包含滚动条，默认false，如果是true则有滚动条，但是滚动还是按插件的方式
+				paddingTop/paddingBottom:0					//设置每一个section顶部和底部的padding，默认为0，一般如果要将菜单，导航等固定在顶部可使用
+				fixedElements:jq选择器						//固定的元素，默认null，需要配置一个jq选择器，在页面滚动时候，设置的元素固定不动
+				keyboardScrolling:true,						//是否可以使用键盘方向键导航，默认true
+				touchSensitivity:5							//在移动页面的滑动敏感度，默认是5，按百分比，越大越难滑动
+				continuousVertical:false,					//页面是否循环滚动，默认false，不像loopTop那样跳动，而且不能和它们同时设置
+				animateAnchor:true,							//锚链接是否可以控制滚动动画，默认true，false则通过锚链接定位到某个页面显示不再有动画效果
+				recordHistory:true,							//是否记录历史，默认true，通过浏览器前进后退来导航，但是autoScrolling也必须设置true
+				menu:false,									//绑定菜单，默认false，设定的相关属性和anchors的值对应后，菜单可以控制滚动，可以设置为菜单的jq选择器
+				navigation:false,							//是否显示导航，默认false，true会显示小圆点
+				navigationPosition:left/right				
+				navigationTooltips:[]						//导航小圆点的tooptip设置，默认[],按照顺序设置
+				showActiveTooptip:false						//是否显示当前页面的导航信息，默认false,true则鼠标不放上去也显示
+				slidesNavigation:false						//是否显示横向幻灯片的导航，默认false
+				slidesNavPosition:top/bottom
+				scrollOverflow:false						//内容超过屏幕是否显示滚动条，默认false，true则会显示滚动条，如果需要滚动查看内容，需要jq.slimscroll插件的配合
+				sectionSelector:							//section的选择器，默认.section
+				slideSelector:								//slide的选择器，默认.slide
+				afterLoad:function(anchorsLink,index){}		//滚动结束后都会触发一次回掉函数，anchorsLink是锚链接名称,index是序号，从1开始计算
+				onLeave:function(index,nextIndex,direction)	//离开一个section时，会触发一次，
+																index是序号，从1开始；
+																nextIndex是滚动到的目标，从1开始；
+																direction是判断往上还是下滚动,up或down,return false可以取消滚动
+				afterRender:function();						//页面结构生成后的回掉函数，
+				afterResize:function();						//浏览器窗口尺寸改变后的回调函数
+				afterSlideLoad:function(anchorsLink,index,slideAnchors,slideIndex);					//滚动到某一幻灯片触发，与afterLoad相似
+				onSlideLeave:function(anchorsLink,index,slideIndex,direction,nextSlideIndex);		//离开一个幻灯片时，与onLeave相似，return false可以取消滚动					
+				
+			})
+		})
+		
+		
+		//方法:使用方式为$.fn.fullpage.xxx();
+		moveSectionUp()							//向上滚动一页
+		moveSectionDown()			
+		moveTo(section,slide)					//滚动到第几页第几个幻灯片，页面从1开始，幻灯片从0开始
+		silentMoveTo()							//和moveTo一样，但是没动画效果
+		moveSlideRight();						//幻灯片向右滚动
+		moveSlideLeft();
+		setAutoScrolling(boolen)				//动态设置autoScrolling
+		setLockAnchors(boolen)					//动态设置LockAnchors
+		setRecordHistory(boolen)
+		setScrollingSpeed(milliseconds)
+		setAllowScrolling(boolen,[directions])	//添加或删除鼠标滚轮/滑动控制，第一个参数true为启用，后面参数为方向，取值有all,up,down,left等，可以用逗号隔开
+		destroy(type)							//销毁fullpage特效，type不写或则使用all，不写则页面的样式和html都在，写了all，则全部销毁
+		reBuild()								//重建效果
+		
+		
+		//延迟加载图片视频
+		data-src='xxxx'				//加载图片或视频
+	*/
+</script>
+</body>
+</html>

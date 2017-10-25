@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>图片悬停展示</title>
+</head>
+<style>
+	*{
+		padding:0;
+		margin:0;
+	}
+	.whole ul{
+		list-style:none;
+	}
+	.whole ul li{
+		float:left;
+		margin:0 5px 0 0;
+	}
+	.whole li img{
+		width:200px;
+	}
+	.wrap{
+		width:500px;
+		border:1px solid #e7393c;
+		position:absolute;
+	}
+	.wrap img{
+		width:500px;
+		float:left;
+	}
+	.mytitle{
+		background:#000;
+		color:#fff;
+		font-size:15px;
+	}
+</style>
+<body>
+	<div class="whole">
+		<ul>
+			<li><a href="images/pic1.jpg" class="tooltip" title="周杰伦1"><img src="images/pic1.jpg"/></a></li>
+			<li><a href="images/pic2.jpg" class="tooltip" title="周杰伦2"><img src="images/pic2.jpg"/></a></li>
+			<li><a href="images/pic3.jpg" class="tooltip" title="周杰伦3"><img src="images/pic3.jpg"/></a></li>
+			<li><a href="images/pic4.jpg" class="tooltip" title="周杰伦4"><img src="images/pic4.jpg"/></a></li>
+		</ul>
+	</div>
+	
+	<script type='text/javascript' src='js/jquery-1.11.3.min.js'></script>
+	<script>
+		$(function(){
+			var x=10;
+			var y=10;
+			$('.tooltip').mouseover(function(e){
+				
+				//获取a的title值
+				this.mytitle=this.title;
+				this.title='';
+				
+				//创建一个元素
+				var DIV=$(this).find('img').clone();
+				var p=$('<p class="mytitle">'+this.mytitle+'</p>');
+				$('.whole').append(DIV);
+				DIV.wrap('<div class="wrap"></div>');
+				$('.wrap').append(p);
+				
+				$('.wrap').css({
+					'top':(e.pageY+y)+'px',
+					'left':(e.pageX+x)+'px',
+				})
+			}).mouseout(function(){
+				this.title=this.mytitle;
+				$('.wrap').remove();
+			}).mousemove(function(e){
+				$('.wrap').css({
+					'top':(e.pageY+y)+'px',
+					'left':(e.pageX+x)+'px',
+				})
+			});
+		})
+	</script>
+</body>
+</html>

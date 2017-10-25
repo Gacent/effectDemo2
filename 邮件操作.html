@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>邮件操作</title>
+</head>
+<style>
+	.one{
+		background-color:#999;
+	}
+	.two{
+		background-color:yellow;
+	}
+	.over{
+		background-color:white;
+	}
+</style>
+<body>
+<div>
+	<table id="table" border="1" cellpadding="10" cellspacing="0">
+		<tr>
+			<th><input type="checkbox" name="all">全选</th>
+			<th>发件人</th>
+			<th>邮件名称</th>
+			<th>邮件附属信息</th>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三1</td>
+			<td>我是邮件1</td>
+			<td>我是附属信息1</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三2</td>
+			<td>我是邮件2</td>
+			<td>我是附属信息2</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三3</td>
+			<td>我是邮件3</td>
+			<td>我是附属信息3</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三4</td>
+			<td>我是邮件4</td>
+			<td>我是附属信息4</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三5</td>
+			<td>我是邮件5</td>
+			<td>我是附属信息5</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三6</td>
+			<td>我是邮件6</td>
+			<td>我是附属信息6</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三7</td>
+			<td>我是邮件7</td>
+			<td>我是附属信息7</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三8</td>
+			<td>我是邮件8</td>
+			<td>我是附属信息8</td>
+		</tr>
+		<tr>
+			<td><input type="checkbox" name="mail"></td>
+			<td>我是张三9</td>
+			<td>我是邮件9</td>
+			<td>我是附属信息9</td>
+		</tr>
+		<tr>
+			<th><input type="checkbox" name="all" onclick="CheckedALL()">全选</th>
+			<th><input type="submit" value="复选" onclick="Checked(2)"></th>
+			<th><input type="submit" value="取消全选" onclick="Checked(0)"></th>
+			<th><input type="submit" value="删除选中选项" onclick="Delected()"></th>
+		</tr>
+	</table>
+</div>
+<script>
+	function colorful()
+	{
+		var one=document.getElementsByTagName("tr");
+		for(var i=0;i<one.length;i++){
+			if(i%2==0)
+				one[i].className="one";
+			else
+				one[i].className="two";
+			if(i!=0&&i!=one.length-1){
+			one[i].onmouseover=function(){	
+				name=this.className;
+				this.className="over";
+				}
+			one[i].onmouseout=function(){
+				this.className=name;
+				}
+			}
+		}
+	}
+	function addLoad(elem)
+	{
+		var old=window.onload;
+		if(typeof elem=='function'){
+			window.onload=elem;
+		}
+		else{
+			window.onload=function(){
+				old();
+				elem();
+			}
+		}
+	}
+	function CheckedALL()
+	{
+		var All=document.getElementsByName("all");
+		var mail=document.getElementsByName("mail");
+		for(var i=0;i<All.length;i++){
+				All[i].checked=!this.checked;
+			}
+		for(var i=0;i<mail.length;i++){
+			mail[i].checked=!this.checked;
+		}
+	}
+	function Checked(num)
+	{
+		var All=document.getElementsByName("all");
+		var mail=document.getElementsByName("mail");
+		var flag=0;
+		if(num==0){
+			for(var i=0;i<All.length;i++){
+				All[i].checked=this.checked;
+			}
+			for(var i=0;i<mail.length;i++){
+				mail[i].checked=this.checked;
+			}
+		}
+		else if(num>1){
+			for(var i=0;i<All.length;i++){
+				All[i].checked=this.checked;
+			}
+			for(var i=0;i<mail.length;i++){
+				if(mail[i].checked)
+					flag=1;
+			}
+			for(var i=0;i<mail.length;i++){
+				if(flag==1){
+					if(mail[i].checked){
+						mail[i].checked=this.checked;
+					}
+					else
+						mail[i].checked=!this.checked;
+				}
+				else return;
+			}
+		}
+	}
+	function Delected()
+	{
+		var All=document.getElementsByName("all");
+		var mail=document.getElementsByName("mail");
+		for(var i=0;i<mail.length;i++){
+			if(mail[i].checked==!this.checked)
+			{
+				var q=mail[i].parentNode.parentNode;
+				q.parentNode.removeChild(q);
+				i--;
+			}
+		}
+		colorful();
+	}
+	addLoad(colorful);
+</script>
+</body>
+</html>

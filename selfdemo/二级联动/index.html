@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>二级联动</title>
+	</head>
+	<body>
+		<form id='myForm'>
+			<select name="province" id="select1">
+				<option>请选择所在省份</option>
+				<option value="0">直辖市</option>
+				<option value="江苏省">江苏省</option>
+				<option value="福建省">福建省</option>
+				<option value="广东省">广东省</option>
+				<option value="甘肃省">甘肃省</option>
+			</select>
+			<select name="city" id="select2">
+				<option value="0">请选择所在城市 </option>
+			</select>
+		</form>
+	</body>
+	<script type="text/javascript">
+		function addEvent(obj,type,fn){
+			if(obj.addEventListener){
+				obj.addEventListener(type,fn,false);
+			}else if(obj.attachEvent){
+				obj.attachEvent('on'+type,function(){
+					fn.call(obj);
+				})
+			}
+		}
+		var city=[
+			['请选择所在城市'],
+			["北京","天津","上海","重庆"],
+     		["南京","苏州","南通","常州"],
+     		["福州","福安","龙岩","南平"],
+     		["广州","潮阳","潮州","澄海"],
+     		["兰州","白银","定西","敦煌"]
+		];
+		addEvent(window,'load',function(){
+		var Form=document.getElementById('myForm');
+		var selection1=Form.elements['province'];
+		var selection2=Form.elements['city'];
+		addEvent(selection1,'change',function(){
+			selection2.length=0;
+			for(var i=0;i<city[this.selectedIndex].length;i++){
+				//city[this.selectedIndex][i];
+				var option=document.createElement('option');
+				var option_text=document.createTextNode(city[this.selectedIndex][i]);
+				option.appendChild(option_text);
+				selection2.appendChild(option);
+			}
+		})
+	})
+	</script>
+</html>

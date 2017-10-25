@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<link rel="stylesheet" type="text/css" href="table.css"/>
+<title>创建表格</title>
+<style>
+	.one{
+		background-color:rgb(1,256,200);
+	}
+	.two{
+		background-color:rgb(7,150,150);
+	}
+	.over{
+		background-color:white;
+	}
+</style>
+</head>
+<body>
+<table id="table">
+	<tr>
+		<th>姓名</th>
+		<th>年龄</th>
+		<th>性别</th>
+	</tr>
+	<tr>
+		<td>小米</td>
+		<td>11</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>大波</td>
+		<td>18</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>小敏</td>
+		<td>10</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>犀利哥</td>
+		<td>20</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>无厘头</td>
+		<td>18</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>剌吟</td>
+		<td>15</td>
+		<td>谜</td>
+	</tr>
+	<tr>
+		<td>小荣</td>
+		<td>51</td>
+		<td>男</td>
+	</tr>
+	<tr>
+		<td>大米</td>
+		<td>91</td>
+		<td>女</td>
+	</tr>
+	<tr>
+		<td>大傻</td>
+		<td>48</td>
+		<td>女</td>
+	</tr>
+</table>
+<script>
+				/*
+				 * 思路：
+				 * 1，因为要操作行的样式，所以要先获取表格对象。
+				 * 2，获取所有被操作的行对象。
+				 * 3，遍历行并给每一行指定样式。
+				 */
+	var name;
+	function addLoad(fuc)
+	{
+		var old=window.onload;
+		if(typeof window.onload!='function'){
+			window.onload=fuc;
+		}else{
+			window.onload=function(){
+				old();
+				fuc();
+			}
+		}
+	}
+	function trColor()
+	{
+		var oTable=document.getElementById("table");
+		var Row=oTable.rows;
+		var oTr=document.getElementsByTagName("tr");
+		for(var i=1;i<Row.length;i++){
+			if(i%2==0){
+				oTr[i].className="one";
+			}
+			else{
+				oTr[i].className="two";
+			}
+		}
+		for(var i=1;i<Row.length;i++){
+			oTr[i].onmouseover=function(){
+				name=this.className;
+				this.className="over";
+			}
+			oTr[i].onmouseout=function(){
+				this.className=name;
+			}
+		}
+	}
+	addLoad(trColor);
+</script>
+</body>
+</html>

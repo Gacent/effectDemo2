@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<meta name="keywords" content="关键字" />
+<meta name="description" content="描述" />
+<title>展开闭合列表</title>
+</head>
+<style>
+	.n{
+		width:100px;
+		height:100px;
+		background:#ccc;
+	}
+	.m{
+		width:100px;
+		height:100px;
+		background:#e7393c;
+		position:absolute;
+	}
+	.w{
+		border:1px solid #000;
+	}
+</style>
+<body>
+
+	<div class="w">
+		<div class="n"></div>
+		<div class="m"></div>
+	</div>
+	<script type='text/javascript' src='js/jquery-1.11.3.min.js'></script>
+	<script>
+		$(function(){
+			$(window).mousemove(function(event){
+				$('.m').stop(true,true).animate({
+					left:event.pageX-($('.m').width()/2),
+					top:event.pageY-($('.m').height()/2)
+				})
+			})
+		})
+	</script>
+</body>
+</html>
